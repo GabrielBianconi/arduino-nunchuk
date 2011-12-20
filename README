@@ -1,1 +1,10 @@
-README.
+ArduinoNunchuk Library - Improved Wii Nunchuk library for Arduino
+
+Copyright 2011 Gabriel Bianconi, http://www.gabrielbianconi.com/
+
+Project URL: http://www.gabrielbianconi.com/projects/arduinonunchuk/
+
+Based on the following projects/websites:
+ - http://www.windmeadow.com/node/42
+ - http://todbot.com/blog/2008/02/18/wiichuck-wii-nunchuck-adapter-available/
+ - http://wiibrew.org/wiki/Wiimote/Extension_Controllers
