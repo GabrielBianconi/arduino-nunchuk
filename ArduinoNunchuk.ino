@@ -1,3 +1,12 @@
+/*
+ * ArduinoNunchuk Demo
+ * 
+ * Copyright 2011 Gabriel Bianconi, http://www.gabrielbianconi.com/
+ *
+ * Project URL: http://www.gabrielbianconi.com/projects/arduinonunchuk/
+ * 
+ */
+
 #include <Wire.h>
 #include "ArduinoNunchuk.h"
 
