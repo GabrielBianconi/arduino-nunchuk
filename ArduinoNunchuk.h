@@ -50,18 +50,17 @@ class ArduinoNunchuk {
       cButton = !((values[5] >> 1) & 1);
       
       _sendByte(0x00, 0x00);
-      delay(100);   
     }
     
   private:
     void _sendByte(byte data, byte location) {        
       Wire.beginTransmission(ADDRESS);
       #if (ARDUINO >= 100)
-      Wire.write((uint8_t) location);
-      Wire.write((uint8_t) data);  
+      Wire.write(location);
+      Wire.write(data);  
       #else
-      Wire.send((uint8_t) location);
-      Wire.send((uint8_t) data); 
+      Wire.send(location);
+      Wire.send(data); 
       #endif
       Wire.endTransmission();
       delay(10);
