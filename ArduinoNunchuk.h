@@ -12,7 +12,6 @@
  * 
  */
 
-
 #ifndef ArduinoNunchuk_H
 #define ArduinoNunchuk_H
 

@@ -34,6 +34,5 @@ void loop() {
   Serial.print(' ');
   Serial.print(nunchuk.zButton, DEC);
   Serial.print(' ');
-  Serial.print(nunchuk.cButton, DEC);
-  Serial.print('\n');
+  Serial.println(nunchuk.cButton, DEC);
 }
