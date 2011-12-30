@@ -1,7 +1,7 @@
 /*
  * ArduinoNunchuk Demo
  * 
- * Copyright 2011 Gabriel Bianconi, http://www.gabrielbianconi.com/
+ * Copyright 2011-2012 Gabriel Bianconi, http://www.gabrielbianconi.com/
  *
  * Project URL: http://www.gabrielbianconi.com/projects/arduinonunchuk/
  * 
@@ -14,12 +14,14 @@
 
 ArduinoNunchuk nunchuk = ArduinoNunchuk();
 
-void setup() {
+void setup()
+{
   Serial.begin(BAUDRATE);
   nunchuk.init();
 }
 
-void loop() {
+void loop()
+{
   nunchuk.update();
   
   Serial.print(nunchuk.analogX, DEC);
