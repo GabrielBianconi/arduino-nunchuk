@@ -36,7 +36,7 @@ void ArduinoNunchuk::init()
 void ArduinoNunchuk::update()
 { 
   int count = 0;      
-  int values[5];
+  int values[6];
   
   Wire.requestFrom (ADDRESS, 6); 
   
