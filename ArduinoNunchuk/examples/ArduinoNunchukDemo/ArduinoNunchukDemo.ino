@@ -1,10 +1,10 @@
 /*
  * ArduinoNunchukDemo.ino
- * 
+ *
  * Copyright 2011-2013 Gabriel Bianconi, http://www.gabrielbianconi.com/
  *
  * Project URL: http://www.gabrielbianconi.com/projects/arduinonunchuk/
- * 
+ *
  */
 
 #include <Wire.h>
@@ -23,7 +23,7 @@ void setup()
 void loop()
 {
   nunchuk.update();
-  
+
   Serial.print(nunchuk.analogX, DEC);
   Serial.print(' ');
   Serial.print(nunchuk.analogY, DEC);
