@@ -43,9 +43,9 @@ void ArduinoNunchuk::update()
 
   ArduinoNunchuk::analogX = values[0];
   ArduinoNunchuk::analogY = values[1];
-  ArduinoNunchuk::accelX = values[2] * 2 * 2 + ((values[5] >> 2) & 1) * 2 + ((values[5] >> 3) & 1);
-  ArduinoNunchuk::accelY = values[3] * 2 * 2 + ((values[5] >> 4) & 1) * 2 + ((values[5] >> 5) & 1);
-  ArduinoNunchuk::accelZ = values[4] * 2 * 2 + ((values[5] >> 6) & 1) * 2 + ((values[5] >> 7) & 1);
+  ArduinoNunchuk::accelX = (values[2] << 2) | ((values[5] >> 2) & 3);
+  ArduinoNunchuk::accelY = (values[3] << 2) | ((values[5] >> 4) & 3);
+  ArduinoNunchuk::accelZ = (values[4] << 2) | ((values[5] >> 6) & 3);
   ArduinoNunchuk::zButton = !((values[5] >> 0) & 1);
   ArduinoNunchuk::cButton = !((values[5] >> 1) & 1);
 
