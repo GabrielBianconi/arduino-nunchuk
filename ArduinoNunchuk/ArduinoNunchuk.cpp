@@ -1,23 +1,18 @@
 /*
  * ArduinoNunchuk.cpp - Improved Wii Nunchuk library for Arduino
  * 
- * Copyright 2011-2012 Gabriel Bianconi, http://www.gabrielbianconi.com/
+ * Copyright 2011-2013 Gabriel Bianconi, http://www.gabrielbianconi.com/
  *
  * Project URL: http://www.gabrielbianconi.com/projects/arduinonunchuk/
  *
- * Based on the following projects/websites:
+ * Based on the following resources:
  *   http://www.windmeadow.com/node/42
  *   http://todbot.com/blog/2008/02/18/wiichuck-wii-nunchuck-adapter-available/
  *   http://wiibrew.org/wiki/Wiimote/Extension_Controllers
  * 
  */
 
-#if (ARDUINO >= 100)
-  #include <Arduino.h>
-#else
-  #include <WProgram.h>
-#endif
-
+#include <Arduino.h>
 #include <Wire.h>
 #include "ArduinoNunchuk.h"
 
@@ -38,7 +33,7 @@ void ArduinoNunchuk::update()
   int count = 0;      
   int values[6];
   
-  Wire.requestFrom (ADDRESS, 6); 
+  Wire.requestFrom(ADDRESS, 6); 
   
   while(Wire.available())
   {
@@ -61,14 +56,9 @@ void ArduinoNunchuk::_sendByte(byte data, byte location)
 {  
   Wire.beginTransmission(ADDRESS);
   
-  #if (ARDUINO >= 100)
-    Wire.write(location);
-    Wire.write(data);  
-  #else
-    Wire.send(location);
-    Wire.send(data); 
-  #endif
-  
+  Wire.write(location);
+  Wire.write(data);
+
   Wire.endTransmission();
   
   delay(10);
