@@ -1,3 +1,4 @@
+
 /*
  * ArduinoNunchuk.cpp - Improved Wii Nunchuk library for Arduino
  *
@@ -23,22 +24,35 @@ void ArduinoNunchuk::init()
   Wire.begin();
 
   ArduinoNunchuk::_sendByte(0x55, 0xF0);
+  delay(10);
   ArduinoNunchuk::_sendByte(0x00, 0xFB);
-
+  delay(10);
   ArduinoNunchuk::update();
 }
 
 void ArduinoNunchuk::update()
 {
-  int count = 0;
-  int values[6];
+  uint8_t count = 0;      
+  uint8_t values[6];
+  uint8_t errors = 0;
 
   Wire.requestFrom(ADDRESS, 6);
 
   while(Wire.available())
   {
     values[count] = Wire.read();
+    if(values[count] == 0xff) errors++;
     count++;
+  }
+
+  //Detect getting only partial data.
+  if(count != 6) {
+    return;
+  }
+
+  //Detect unplugged nunchuck and attempt reconnect.
+  if(errors == 6) {
+    init();
   }
 
   ArduinoNunchuk::analogX = values[0];
@@ -61,5 +75,4 @@ void ArduinoNunchuk::_sendByte(byte data, byte location)
 
   Wire.endTransmission();
 
-  delay(10);
 }
