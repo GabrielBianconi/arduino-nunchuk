@@ -22,12 +22,19 @@
 void ArduinoNunchuk::init()
 {
   Wire.begin();
-
+  init2();
+}
+void ArduinoNunchuk::init2()
+{
+  ArduinoNunchuk::pluggedin = false;
   ArduinoNunchuk::_sendByte(0x55, 0xF0);
   delay(10);
   ArduinoNunchuk::_sendByte(0x00, 0xFB);
   delay(10);
   ArduinoNunchuk::update();
+  ArduinoNunchuk::analogXcenter = ArduinoNunchuk::analogX;
+  ArduinoNunchuk::analogYcenter = ArduinoNunchuk::analogX;
+  ArduinoNunchuk::pluggedin = true;
 }
 
 void ArduinoNunchuk::update()
@@ -38,7 +45,7 @@ void ArduinoNunchuk::update()
 
   Wire.requestFrom(ADDRESS, 6);
 
-  while(Wire.available())
+  while(Wire.available() && count <= 6)
   {
     values[count] = Wire.read();
     if(values[count] == 0xff) errors++;
@@ -52,7 +59,7 @@ void ArduinoNunchuk::update()
 
   //Detect unplugged nunchuck and attempt reconnect.
   if(errors == 6) {
-    init();
+    init2();
   }
 
   ArduinoNunchuk::analogX = values[0];
