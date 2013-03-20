@@ -21,7 +21,7 @@
 void ArduinoNunchuk::init()
 {
   Wire.begin();
-  init2();
+  reinit();
 }
 void ArduinoNunchuk::reinit()
 {
