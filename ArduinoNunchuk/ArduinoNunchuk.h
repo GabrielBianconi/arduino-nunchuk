@@ -20,10 +20,10 @@
 class ArduinoNunchuk
 {
   public:
-    int analogXcenter;
-    int analogYcenter;
-    int analogX;
-    int analogY;
+    uint8_t analogXcenter;
+    uint8_t analogYcenter;
+    uint8_t analogX;
+    uint8_t analogY;
     int accelX;
     int accelY;
     int accelZ;
