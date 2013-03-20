@@ -1,4 +1,3 @@
-
 /*
  * ArduinoNunchuk.cpp - Improved Wii Nunchuk library for Arduino
  *
@@ -32,6 +31,7 @@ void ArduinoNunchuk::init2()
   ArduinoNunchuk::_sendByte(0x00, 0xFB);
   delay(10);
   ArduinoNunchuk::update();
+  //testing 
   ArduinoNunchuk::analogXcenter = ArduinoNunchuk::analogX;
   ArduinoNunchuk::analogYcenter = ArduinoNunchuk::analogX;
   ArduinoNunchuk::pluggedin = true;
@@ -58,7 +58,7 @@ void ArduinoNunchuk::update()
   }
 
   //Detect unplugged nunchuck and attempt reconnect.
-  if(errors == 6) {
+  if(errors >= 6) {
     init2();
   }
 
