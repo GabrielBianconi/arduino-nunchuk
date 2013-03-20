@@ -23,7 +23,7 @@ void ArduinoNunchuk::init()
   Wire.begin();
   init2();
 }
-void ArduinoNunchuk::init2()
+void ArduinoNunchuk::reinit()
 {
   ArduinoNunchuk::pluggedin = false;
   ArduinoNunchuk::_sendByte(0x55, 0xF0);
@@ -59,7 +59,7 @@ void ArduinoNunchuk::update()
 
   //Detect unplugged nunchuck and attempt reconnect.
   if(errors >= 6) {
-    init2();
+    reinit();
   }
 
   ArduinoNunchuk::analogX = values[0];
