@@ -26,10 +26,12 @@ void ArduinoNunchuk::init()
 }
 void ArduinoNunchuk::reinit()
 {
+  //init the nunchuk 
   ArduinoNunchuk::_sendByte(0x55, 0xF0);
   delay(10);
   ArduinoNunchuk::_sendByte(0x00, 0xFB);
   delay(10);
+  //prime the nunchuk for reading data
   ArduinoNunchuk::_sendByte(0x00, 0x00);
   delay(10);
   ArduinoNunchuk::update();
@@ -53,13 +55,13 @@ void ArduinoNunchuk::update()
     count++;
   }
 
-  //Detect getting only partial data.
+  //detect receiving only partial data.
   if(count != 6) {
     ArduinoNunchuk::pluggedin = false;
     return;
   }
 
-  //Detect unplugged nunchuck and attempt reconnect.
+  //detect the nunchuk being unplugged and attempt to reconnect.
   if(errors >= 6) {
     ArduinoNunchuk::reinit();
     return;
@@ -72,15 +74,13 @@ void ArduinoNunchuk::update()
   ArduinoNunchuk::accelZ = (values[4] << 2) | ((values[5] >> 6) & 3);
   ArduinoNunchuk::zButton = !((values[5] >> 0) & 1);
   ArduinoNunchuk::cButton = !((values[5] >> 1) & 1);
-
+ 
+  //prime the nunchuk for reading data
   ArduinoNunchuk::_sendByte(0x00, 0x00);
 
-
   ArduinoNunchuk::pluggedin = true;
-
-  ArduinoNunchuk::magnitude = sqrt(pow((ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX),2)+pow((ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY),2));
-
-  ArduinoNunchuk::angle = (atan2(ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY,ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX)*57.2957) + 180;
+  ArduinoNunchuk::analogMagnitude = sqrt(pow((ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX),2)+pow((ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY),2));
+  ArduinoNunchuk::analogAngle = (atan2(ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY,ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX)*57.2957) + 180;
 
 
 }
