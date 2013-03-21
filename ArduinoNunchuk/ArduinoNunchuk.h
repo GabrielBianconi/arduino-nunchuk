@@ -24,6 +24,8 @@ class ArduinoNunchuk
     uint8_t analogYcenter;
     uint8_t analogX;
     uint8_t analogY;
+    int magnitude;
+    int angle;
     int accelX;
     int accelY;
     int accelZ;
@@ -35,7 +37,7 @@ class ArduinoNunchuk
     void update();
 
   private:
-    void init2();
+    void reinit();
     void _sendByte(byte data, byte location);
 };
 
