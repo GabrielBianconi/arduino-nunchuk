@@ -24,8 +24,8 @@ class ArduinoNunchuk
     uint8_t analogYcenter;
     uint8_t analogX;
     uint8_t analogY;
-    int magnitude;
-    int angle;
+    int analogMagnitude;
+    int analogAngle;
     int accelX;
     int accelY;
     int accelZ;
