@@ -35,9 +35,9 @@ void ArduinoNunchuk::reinit()
   ArduinoNunchuk::_sendByte(0x00, 0x00);
   delay(10);
   ArduinoNunchuk::update();
+  ArduinoNunchuk::pluggedin = true;
   ArduinoNunchuk::analogXcenter = ArduinoNunchuk::analogX;
   ArduinoNunchuk::analogYcenter = ArduinoNunchuk::analogY;
-
 }
 
 void ArduinoNunchuk::update()
@@ -78,10 +78,8 @@ void ArduinoNunchuk::update()
   //prime the nunchuk for reading data
   ArduinoNunchuk::_sendByte(0x00, 0x00);
 
-  ArduinoNunchuk::pluggedin = true;
   ArduinoNunchuk::analogMagnitude = sqrt(pow((ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX),2)+pow((ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY),2));
   ArduinoNunchuk::analogAngle = (atan2(ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY,ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX)*57.2957) + 180;
-
 
 }
 
