@@ -36,9 +36,7 @@ void ArduinoNunchuk::reinit()
   delay(10);
  
   ArduinoNunchuk::update();
-  ArduinoNunchuk::pluggedin = true;
-  ArduinoNunchuk::analogXcenter = ArduinoNunchuk::analogX;
-  ArduinoNunchuk::analogYcenter = ArduinoNunchuk::analogY;
+  
 
 }
 
@@ -64,6 +62,7 @@ void ArduinoNunchuk::update()
   }
 
   //detect the nunchuk being unplugged and attempt to reconnect.
+  
   if(errors >= 6) {
     ArduinoNunchuk::reinit();
     return;
@@ -77,8 +76,17 @@ void ArduinoNunchuk::update()
   ArduinoNunchuk::zButton = !((values[5] >> 0) & 1);
   ArduinoNunchuk::cButton = !((values[5] >> 1) & 1);
  
+
   //prime the nunchuk for reading data
   ArduinoNunchuk::_sendByte(0x00, 0x00);
+
+//this check can't go in the init section because some controllers do not get re-init on a hot plug (memorex)
+
+if(ArduinoNunchuk::pluggedin == false){
+ArduinoNunchuk::pluggedin = true;
+  ArduinoNunchuk::analogXcenter = ArduinoNunchuk::analogX;
+  ArduinoNunchuk::analogYcenter = ArduinoNunchuk::analogY;
+}
 
   ArduinoNunchuk::analogMagnitude = sqrt(pow((ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX),2)+pow((ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY),2));
   ArduinoNunchuk::analogAngle = (atan2(ArduinoNunchuk::analogYcenter-ArduinoNunchuk::analogY,ArduinoNunchuk::analogXcenter-ArduinoNunchuk::analogX)*57.2957);
