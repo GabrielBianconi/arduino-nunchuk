@@ -51,6 +51,7 @@ void ArduinoNunchuk::update()
   while(Wire.available() && count <= 6)
   {
     values[count] = Wire.read();
+    //some brands of nunchuk give FF and others give 00 when not initialized, so watch for both
     if(values[count] == 0xFF || values[count] == 0x00) errors++;
     count++;
   }
