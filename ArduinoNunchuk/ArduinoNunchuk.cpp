@@ -42,6 +42,16 @@ void ArduinoNunchuk::reinit()
 
 void ArduinoNunchuk::update()
 {
+
+
+  //prime the nunchuk for reading data
+  //this needs to be immediately before reading data or
+  //some controllers will send corrupt data
+  //(memorex in particular)
+  //dont put at end of function
+
+  ArduinoNunchuk::_sendByte(0x00, 0x00);
+
   uint8_t count = 0;      
   uint8_t values[6];
   uint8_t errors = 0;
@@ -77,9 +87,6 @@ void ArduinoNunchuk::update()
   ArduinoNunchuk::zButton = !((values[5] >> 0) & 1);
   ArduinoNunchuk::cButton = !((values[5] >> 1) & 1);
  
-
-  //prime the nunchuk for reading data
-  ArduinoNunchuk::_sendByte(0x00, 0x00);
 
 //this check can't go in the init section because some controllers do not get re-init on a hot plug (memorex)
 
