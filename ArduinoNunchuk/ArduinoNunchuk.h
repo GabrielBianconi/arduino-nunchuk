@@ -19,20 +19,27 @@
 
 class ArduinoNunchuk
 {
-  public:
-    int analogX;
-    int analogY;
-    int accelX;
-    int accelY;
-    int accelZ;
-    int zButton;
-    int cButton;
+public:
+  uint8_t analogXcenter;
+  uint8_t analogYcenter;
+  uint8_t analogX;
+  uint8_t analogY;
+  int analogMagnitude;
+  int analogAngle;
+  int accelX;
+  int accelY;
+  int accelZ;
+  boolean zButton;
+  boolean cButton;
+  boolean pluggedin;
 
-    void init();
-    void update();
+  void init();
+  void update();
 
-  private:
-    void _sendByte(byte data, byte location);
+private:
+  boolean official;
+  void reinit();
+  void _sendByte(byte data, byte location);
 };
 
 #endif
