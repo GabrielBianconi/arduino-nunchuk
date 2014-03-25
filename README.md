@@ -13,6 +13,6 @@ Based on the following resources:
 
 Note: This project is no longer maintained, but it is functional.
 
-## INSTALLATION:
+## Installation
 
 Copy the 'ArduinoNunchuk' folder, located in the same folder as this 'README' file, to the Arduino libraries folder (Arduino/libraries).
